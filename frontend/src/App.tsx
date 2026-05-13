@@ -14,9 +14,13 @@ function App() {
 
   const [result, setResult] = useState({
   score: 0,
-  rating: "",
+  strength: "",
+  risk: "",
+  crack_time: "",
+  crack_resistance: "",
+  entropy: 0,
   feedback: [] as string[],
-  });
+});
 
   const analyzePassword = async (
     value: string
@@ -146,7 +150,7 @@ function App() {
 
                 <p className="text-green-400 font-semibold">
 
-                  {result.rating}
+                  {result.risk} • {result.crack_time} to crack
 
                 </p>
               </div>
@@ -169,6 +173,34 @@ function App() {
                 Score: {result.score}/100
 
               </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4 mt-6">
+
+              <div className="bg-[#050b12] border border-green-500/10 rounded-2xl p-5">
+
+                <p className="text-gray-400 text-sm">
+                   Estimated Entropy
+                </p>
+
+                <p className="text-cyan-300 text-3xl font-bold mt-2">
+
+                 {result.entropy} bits
+
+                </p>
+               </div>
+
+               <div className="bg-[#050b12] border border-green-500/10 rounded-2xl p-5">
+
+                 <p className="text-gray-400 text-sm">
+                    Crack Resistance
+                 </p>
+
+                 <p className="text-green-400 text-3xl font-bold mt-2">
+
+                 {result.crack_resistance}
+
+                 </p>
+               </div>
             </div>
 
             {/* FINDINGS */}
