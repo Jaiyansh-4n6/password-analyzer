@@ -98,24 +98,22 @@ function App() {
         {/* CARD */}
         <div className="relative bg-black/40 border border-green-500/20 rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(34,197,94,0.08)] backdrop-blur-xl">
         <motion.div
-  animate={{
-    y: ["-100%", "500%"],
-  }}
-  transition={{
-    duration: 4,
-    repeat: Infinity,
-    ease: "linear",
-  }}
-  className="
-    absolute
-    left-0
-    top-0
-    w-full
-    h-1
-    bg-green-400/30
-    blur-sm
-    pointer-events-none
-  "
+          animate={{
+            top: ["0%", "100%", "0%"],
+          }}
+          transition={{
+              duration: 30,
+              repeat: Infinity,
+              ease: "linear",
+                       }}
+            className="
+            absolute
+            left-0
+            w-full
+            h-[5px]
+            bg-green-200/40
+            shadow-[0_0_20px_rgba(74,222,128,0.8)]
+            pointer-events-none"
 />
           <div className="p-6">
 
