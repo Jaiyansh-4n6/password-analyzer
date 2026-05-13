@@ -1,120 +1,213 @@
-# 🔐 AI-Enhanced Password Strength Analyzer
+# 🔐 Real Time Password Strength Analyzer
 
-A smart Python-based password security analyzer that evaluates password strength using **character diversity, randomness detection, sequence analysis, and repetition penalties** to simulate real-world password attack risks.  
+A modern cybersecurity-themed password security analyzer built using **React, FastAPI, and Python** that evaluates password strength in real time using:
 
-Built for learning **Cybersecurity fundamentals**, password auditing, and secure authentication practices.
+- Character diversity analysis
+- Entropy estimation
+- Sequence detection
+- Repetition analysis
+- Randomness simulation
+- Risk prediction logic
+
+Designed to simulate practical password attack risks and promote secure authentication practices.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-✅ Checks for:
-- Uppercase letters  
-- Lowercase letters  
-- Digits  
-- Special symbols  
+## ✅ Real-Time Password Analysis
+- Live password strength detection
+- Dynamic score updates while typing
+- Instant security feedback
 
-✅ Intelligent security analysis:
-- Sequential pattern detection (`abc`, `123`, `321`)
+## ✅ Intelligent Security Checks
+- Uppercase letter detection
+- Lowercase letter detection
+- Number detection
+- Special character detection
+- Sequential pattern detection (`abc`, `123`)
 - Repeated character detection (`aaa`, `111`)
-- Randomness/entropy simulation
-- Dynamic scoring system
-- Real-world crack risk estimation
+- Randomness analysis
+- Entropy estimation
 
-✅ Gives:
-- Final security score
-- Security rating
+## ✅ Advanced Security Insights
+- Password strength rating
+- Estimated crack resistance
+- Predicted attack risk level
+- Estimated crack time
 - Personalized improvement suggestions
 
----
-
-## 📸 Example Output
-
-```bash
-### AI-Enhanced Password Strength Analyzer ###
-
-Enter the password : Pass@123
-
-### AI-Enhanced Password Risk Analysis ###
-
-analyzed password : Pass@123
-final risk score of the inputted password : 60 / 80
-Predicted Real-World Risk : GOOD SECURITY - Estimated to take months to a year to crack.
-
-### Suggestions for Dynamic Defense Improvement ###
---> Avoid simple sequences like '123'
-```
+## ✅ Modern Cybersecurity UI
+- Real-time animated strength bar
+- Cybersecurity dashboard interface
+- Animated terminal scan effect
+- Neon cyber grid background
+- Interactive UI cards and animations
 
 ---
 
-## 🛠️ Technologies Used
+# 🛠️ Technologies Used
 
+## Frontend
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+
+## Backend
+- FastAPI
 - Python 3
-- Python `string` library
+
+## Python Libraries
+- string
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```bash
 password-strength-analyzer/
 │
-├── password_analyzer.py
+├── backend/
+│   ├── analyzer.py
+│   ├── main.py
+│   ├── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   ├── index.css
+│
 ├── README.md
+├── .gitignore
 ├── statement.md
 ```
 
 ---
 
-## ⚡ Installation
+# ⚡ Installation & Setup
 
-Clone the repository:
+## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/password-strength-analyzer.git
+git clone https://github.com/Jaiyansh12/password-analyzer.git
 ```
 
-Move into the project directory:
+---
+
+## 2️⃣ Move Into Project Folder
 
 ```bash
 cd password-analyzer
 ```
 
-Run the program:
+---
+
+# 🔹 Backend Setup
+
+## Install Dependencies
 
 ```bash
-python project.py
+pip install -r requirements.txt
+```
+
+## Run Backend Server
+
+```bash
+cd backend
+uvicorn main:app --reload
+```
+
+Backend runs on:
+
+```bash
+http://127.0.0.1:8000
 ```
 
 ---
 
-## 🔍 How It Works
+# 🔹 Frontend Setup
 
-The analyzer performs multiple layers of checks:
+## Install Dependencies
+
+```bash
+cd frontend
+npm install
+```
+
+## Start Frontend
+
+```bash
+npm run dev
+```
+
+Frontend runs on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+# 🔍 How It Works
+
+The analyzer performs multiple layers of password auditing:
 
 1. Detects character diversity
 2. Measures password length
-3. Simulates entropy/randomness
-4. Detects predictable sequences
-5. Detects repeated patterns
-6. Calculates final risk score
-7. Predicts practical cracking difficulty
+3. Calculates entropy estimation
+4. Simulates randomness
+5. Detects predictable sequences
+6. Detects repeated patterns
+7. Calculates security score
+8. Predicts real-world cracking difficulty
+9. Generates security recommendations
 
 ---
 
-## 📈 Security Ratings
+# 📈 Security Rating System
 
-| Score Range | Risk Level |
+| Score Range | Strength Level |
 |---|---|
-| 65+ | HIGH SECURITY |
-| 50–64 | GOOD SECURITY |
-| 35–49 | MEDIUM RISK |
-| 20–34 | HIGH RISK |
-| Below 20 | CRITICAL RISK |
+| 80–100 | Very Strong |
+| 60–79 | Strong |
+| 40–59 | Medium |
+| 20–39 | Weak |
+| Below 20 | Very Weak |
 
 ---
 
-## 🎯 Future Improvements
+# 🧠 Risk Prediction Levels
 
-- GUI version using Tkinter / PyQt
-- Password generation feature
+| Risk Level | Estimated Crack Time |
+|---|---|
+| Low Risk | Days/Weeks |
+| Moderate Risk | Hours/Days |
+| High Risk | Minutes/Hours |
+| Critical Risk | Seconds/Minutes |
+
+---
+
+# 🎯 Future Improvements
+
+- Artificial Intelligence Integration
+- Password generator
+
+
+---
+
+# 📌 Project Purpose
+
+This project was developed to strengthen understanding of:
+
+- Cybersecurity fundamentals
+- Password auditing techniques
+- Authentication security
+- Frontend-backend integration
+- Real-time security analysis systems
+
+---
+
+# 👨‍💻 Author
+Jaiyansh Dhaulakhandi
