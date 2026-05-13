@@ -19,7 +19,7 @@ function App() {
   crack_time: "",
   crack_resistance: "",
   entropy: 0,
-  feedback: [] as string[],
+  findings: [] as string[],
 });
 
   const analyzePassword = async (
@@ -52,24 +52,36 @@ function App() {
   };
 
   const getStrengthColor = () => {
-    if (result.score >= 70)
-      return "bg-green-400";
 
-    if (result.score >= 40)
-      return "bg-yellow-400";
+  if (result.score >= 80)
+    return "bg-green-400";
 
-    return "bg-red-400";
-  };
+  if (result.score >= 60)
+    return "bg-lime-400";
+
+  if (result.score >= 40)
+    return "bg-yellow-400";
+
+  if (result.score >= 20)
+    return "bg-orange-400";
+
+  return "bg-red-500";
+};
 
   return (
-    <main className="min-h-screen bg-[#020617] text-white flex items-center justify-center px-6">
+    <motion.main 
+    initial = {{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="min-h-screen text-white flex items-center justify-center px-6"
+    > 
 
       <div className="w-full max-w-3xl">
 
         {/* TITLE */}
         <div className="text-center mb-10">
 
-          <h1 className="text-5xl font-bold text-green-400 mb-4">
+          <h1 className="text-5xl font-bold text-green-400 mb-4 drop-shadow-[0_0_18px_rgba(74,222,128,0.9)]">
 
             Password Strength Analyzer
 
@@ -84,8 +96,27 @@ function App() {
         </div>
 
         {/* CARD */}
-        <div className="bg-black/40 border border-green-500/20 rounded-3xl overflow-hidden shadow-2xl">
-
+        <div className="relative bg-black/40 border border-green-500/20 rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(34,197,94,0.08)] backdrop-blur-xl">
+        <motion.div
+  animate={{
+    y: ["-100%", "500%"],
+  }}
+  transition={{
+    duration: 4,
+    repeat: Infinity,
+    ease: "linear",
+  }}
+  className="
+    absolute
+    left-0
+    top-0
+    w-full
+    h-1
+    bg-green-400/30
+    blur-sm
+    pointer-events-none
+  "
+/>
           <div className="p-6">
 
             {/* INPUT */}
@@ -164,7 +195,7 @@ function App() {
                   transition={{
                     duration: 0.4,
                   }}
-                  className={`h-full ${getStrengthColor()}`}
+                  className={`h-full ${getStrengthColor()} shadow-[0_020px_currentcolor]`}
                 />
               </div>
 
@@ -176,7 +207,7 @@ function App() {
             </div>
             <div className="grid grid-cols-2 gap-4 mt-6">
 
-              <div className="bg-[#050b12] border border-green-500/10 rounded-2xl p-5">
+              <div className="bg-[#050b12] border border-green-500/10 rounded-2xl p-5 transition-all duration-300 hover:border-green-400/40 hover:shadow-[0_0_25px_rgba(74,222,128,0.12)] hover:-translate-y-1">
 
                 <p className="text-gray-400 text-sm">
                    Estimated Entropy
@@ -189,7 +220,7 @@ function App() {
                 </p>
                </div>
 
-               <div className="bg-[#050b12] border border-green-500/10 rounded-2xl p-5">
+               <div className="bg-[#050b12] border border-green-500/10 rounded-2xl p-5 transition-all duration-300 hover:border-green-400/40 hover:shadow-[0_0_25px_rgba(74,222,128,0.12)] hover:-translate-y-1">
 
                  <p className="text-gray-400 text-sm">
                     Crack Resistance
@@ -219,7 +250,7 @@ function App() {
                   analysis.
 
                 </p>
-              ) : result.feedback.length ===
+              ) : result.findings.length ===
                 0 ? (
                 <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-4 text-green-300">
 
@@ -230,7 +261,7 @@ function App() {
               ) : (
                 <div className="space-y-4">
 
-                  {result.feedback.map(
+                  {result.findings.map(
                     (
                       item: string,
                       index: number
@@ -264,7 +295,7 @@ function App() {
           </div>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }
 
