@@ -1,17 +1,17 @@
 import string
 
 # minimum length set for giving bonus score
-min_length = 10
+min_length = 12
 
 # score weightage
 # Reduced individual weights and increased total weight for a final-gained score
 weightage = {
-    "length_bonus": 25,
-    "upper": 15,
-    "lower": 15,
-    "digits": 15,
-    "characters": 15,
-    "randomness_bonus": 15,
+    "length_bonus": 19,
+    "upper": 19,
+    "lower": 19,
+    "digits": 19,
+    "characters": 19,
+    "randomness_bonus": 5,
     "sequence_penalty": -5,
     "repetition_penalty": -5
 }
@@ -163,13 +163,13 @@ def analyze(password):
 
         score += max_length_score
 
-    elif length > 8:
+    elif length > 10:
 
         score += max_length_score - 5
 
         feedback.append(f"Use more than {min_length} characters for better security.")
 
-    elif length > 6:
+    elif length > 8:
 
         score += max_length_score - 10
 
