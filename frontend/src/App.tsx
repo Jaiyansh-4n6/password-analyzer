@@ -1,0 +1,256 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Lock,
+  Eye,
+  EyeOff,
+  TriangleAlert,
+} from "lucide-react";
+
+function App() {
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] =
+    useState(false);
+
+  const [result, setResult] = useState({
+    score: 0,
+    rating: "",
+    feedback: [],
+  });
+
+  const analyzePassword = async (
+    value: string
+  ) => {
+    setPassword(value);
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/analyze",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            password: value,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      setResult(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getStrengthColor = () => {
+    if (result.score >= 70)
+      return "bg-green-400";
+
+    if (result.score >= 40)
+      return "bg-yellow-400";
+
+    return "bg-red-400";
+  };
+
+  return (
+    <main className="min-h-screen bg-[#020617] text-white flex items-center justify-center px-6">
+
+      <div className="w-full max-w-3xl">
+
+        {/* TITLE */}
+        <div className="text-center mb-10">
+
+          <h1 className="text-5xl font-bold text-green-400 mb-4">
+
+            Password Strength Analyzer
+
+          </h1>
+
+          <p className="text-gray-400">
+
+            Analyze password complexity in
+            real time.
+
+          </p>
+        </div>
+
+        {/* CARD */}
+        <div className="bg-black/40 border border-green-500/20 rounded-3xl overflow-hidden shadow-2xl">
+
+          {/* TOP BAR */}
+          <div className="flex items-center justify-between px-5 py-3 border-b border-green-500/10">
+
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+
+            <p className="text-sm text-green-400 tracking-[0.2em] uppercase">
+
+              Security Terminal
+
+            </p>
+          </div>
+
+          <div className="p-6">
+
+            {/* INPUT */}
+            <div>
+
+              <label className="text-green-300 text-sm">
+
+                Enter Password
+
+              </label>
+
+              <div className="flex items-center mt-3 bg-[#050b12] border border-green-500/10 rounded-2xl overflow-hidden">
+
+                <div className="px-4 text-gray-400">
+                  <Lock size={18} />
+                </div>
+
+                <input
+                  type={
+                    showPassword
+                      ? "text"
+                      : "password"
+                  }
+                  placeholder="Type password..."
+                  value={password}
+                  onChange={(e) =>
+                    analyzePassword(
+                      e.target.value
+                    )
+                  }
+                  className="
+                    flex-1 bg-transparent
+                    px-2 py-5 outline-none
+                    text-white
+                    placeholder:text-gray-600
+                  "
+                />
+
+                <button
+                  onClick={() =>
+                    setShowPassword(
+                      !showPassword
+                    )
+                  }
+                  className="px-4 text-gray-400"
+                >
+                  {showPassword ? (
+                    <EyeOff size={18} />
+                  ) : (
+                    <Eye size={18} />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* STRENGTH */}
+            <div className="mt-8">
+
+              <div className="flex justify-between mb-3">
+
+                <p>Security Strength</p>
+
+                <p className="text-green-400 font-semibold">
+
+                  {result.rating}
+
+                </p>
+              </div>
+
+              <div className="h-4 bg-[#050b12] rounded-full overflow-hidden">
+
+                <motion.div
+                  animate={{
+                    width: `${result.score}%`,
+                  }}
+                  transition={{
+                    duration: 0.4,
+                  }}
+                  className={`h-full ${getStrengthColor()}`}
+                />
+              </div>
+
+              <p className="mt-3 text-gray-400">
+
+                Score: {result.score}/100
+
+              </p>
+            </div>
+
+            {/* FINDINGS */}
+            <div className="mt-10">
+
+              <h2 className="text-xl text-green-300 font-semibold mb-4">
+
+                Security Findings
+
+              </h2>
+
+              {password.length === 0 ? (
+                <p className="text-gray-500">
+
+                  Enter password to begin
+                  analysis.
+
+                </p>
+              ) : result.feedback.length ===
+                0 ? (
+                <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-4 text-green-300">
+
+                  ✔ No major weaknesses
+                  detected.
+
+                </div>
+              ) : (
+                <div className="space-y-4">
+
+                  {result.feedback.map(
+                    (
+                      item: string,
+                      index: number
+                    ) => (
+                      <div
+                        key={index}
+                        className="
+                          flex items-start gap-3
+                          bg-red-500/10
+                          border border-red-500/20
+                          rounded-2xl p-4
+                        "
+                      >
+
+                        <TriangleAlert
+                          size={18}
+                          className="text-red-400 mt-0.5"
+                        />
+
+                        <p className="text-red-300 text-sm">
+
+                          {item}
+
+                        </p>
+                      </div>
+                    )
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default App;
