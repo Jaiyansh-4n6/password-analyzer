@@ -5,8 +5,16 @@ min_length = 10
 
 # score weightage
 # Reduced individual weights and increased total weight for a finer-grained score
-weightage = {"length_bonus": 15, "upper": 20, "lower": 20, "digits": 20, "characters": 20, 
-             "randomness_bonus": 5, "sequence_penalty": -20, "repetition_penalty": -20}
+weightage = {
+    "length_bonus": 25,
+    "upper": 15,
+    "lower": 15,
+    "digits": 15,
+    "characters": 15,
+    "randomness_bonus": 15,
+    "sequence_penalty": -5,
+    "repetition_penalty": -5
+}
 
 # ading punctuations/symbols using string library 
 characters = string.punctuation
@@ -106,21 +114,52 @@ def analyze(password):
         score += weightage["repetition_penalty"] # penalty is negative
         feedback.append("Avoid repeating characters like 'aaa' or '111'.")
 
-    return score, feedback
+    entropy = round(len(password) * 4.2)
+
+    return score, feedback, entropy
 
 # create a function for counting the resultant rating of the password using if else statements
 def rate(score):
-    # Mapping the total score to a risk-based assessment
-    if score >= 65:
-        return "HIGH SECURITY - Estimated to take years to crack."
-    elif score >= 50:
-        return "GOOD SECURITY - Estimated to take months to a year to crack."
-    elif score >= 35:
-        return "MEDIUM RISK - Estimated to take days to a few weeks to crack. Immediate improvement suggested."
+
+    if score >= 80:
+        return {
+            "strength": "Very Strong",
+            "risk": "Low Risk",
+            "crack_time": "Years",
+            "crack_resistance": "Excellent"
+        }
+
+    elif score >= 60:
+        return {
+            "strength": "Strong",
+            "risk": "Moderate Risk",
+            "crack_time": "Months",
+            "crack_resistance": "Strong"
+        }
+
+    elif score >= 40:
+        return {
+            "strength": "Medium",
+            "risk": "Moderate Risk",
+            "crack_time": "Weeks",
+            "crack_resistance": "Moderate"
+        }
+
     elif score >= 20:
-        return "HIGH RISK - Estimated to take hours to a day to crack. Change immediately."
+        return {
+            "strength": "Weak",
+            "risk": "High Risk",
+            "crack_time": "Hours",
+            "crack_resistance": "Weak"
+        }
+
     else:
-        return "CRITICAL RISK - Estimated to take minutes or less to crack. NOT VALID."
+        return {
+            "strength": "Very Weak",
+            "risk": "Critical Risk",
+            "crack_time": "Minutes",
+            "crack_resistance": "Very Weak"
+        }
 
 # create a function to display the final results
 def result(password, score, feedback):
