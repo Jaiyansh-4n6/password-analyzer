@@ -13,9 +13,9 @@ function App() {
     useState(false);
 
   const [result, setResult] = useState({
-    score: 0,
-    rating: "",
-    feedback: [],
+  score: 0,
+  rating: "",
+  feedback: [] as string[],
   });
 
   const analyzePassword = async (
@@ -39,6 +39,7 @@ function App() {
       );
 
       const data = await response.json();
+      console.log(data);
 
       setResult(data);
     } catch (error) {
@@ -80,24 +81,6 @@ function App() {
 
         {/* CARD */}
         <div className="bg-black/40 border border-green-500/20 rounded-3xl overflow-hidden shadow-2xl">
-
-          {/* TOP BAR */}
-          <div className="flex items-center justify-between px-5 py-3 border-b border-green-500/10">
-
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
-            </div>
-
-            <p className="text-sm text-green-400 tracking-[0.2em] uppercase">
-
-              Security Terminal
-
-            </p>
-          </div>
 
           <div className="p-6">
 
@@ -168,7 +151,7 @@ function App() {
                 </p>
               </div>
 
-              <div className="h-4 bg-[#050b12] rounded-full overflow-hidden">
+              <div className="h-5 bg-[#050b12] rounded-full overflow-hidden">
 
                 <motion.div
                   animate={{
