@@ -2,10 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from analyzer import analyze, rate
+from analyzer import analyze
 
 app = FastAPI()
 
+# Allow frontend connection
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -14,24 +15,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Request format
 class PasswordRequest(BaseModel):
     password: str
+
 
 @app.post("/analyze")
 def analyze_password(data: PasswordRequest):
 
     password = data.password
 
-    score, feedback, entropy = analyze(password)
-
-    details = rate(score)
-
-    return {
-        "score": score,
-        "feedback": feedback,
-        "entropy": entropy,
-        "strength": details["strength"],
-        "risk": details["risk"],
-        "crack_time": details["crack_time"],
-        "crack_resistance": details["crack_resistance"]
-    }
+    return analyze(password)
