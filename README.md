@@ -91,7 +91,7 @@ password-strength-analyzer/
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/Jaiyansh12/password-analyzer.git
+git clone https://github.com/Jaiyansh-4n6/password-analyzer.git
 ```
 
 ---
